@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class AccountDatabase extends Account{
+public class AccountDatabase extends Account {
 
     public ArrayList<Account> Accounts;
 
@@ -8,7 +8,7 @@ public class AccountDatabase extends Account{
         Accounts = new ArrayList<>();
     }
 
-    public void addAccount (Account a) {
+    public void addAccount(Account a) {
         Accounts.add(a);
     }
 
@@ -52,7 +52,7 @@ public class AccountDatabase extends Account{
 
     public void printAccount(String username) {
         for (Account a : Accounts) {
-            if(a.getUsername().equals(username)) {
+            if (a.getUsername().equals(username)) {
                 System.out.println("-------------------------------------------------\n" +
                         "Account Username          : " + a.getUsername() + " \n" +
                         "Account Password          : " + a.getPassword() + "\n" +

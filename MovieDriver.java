@@ -4,19 +4,27 @@ public class MovieDriver {
 
     public static Account currentAccount;
     public static String username;
-    public static String ownerCardNumber = "9999999999999999";
-    public static int ownerExpirationMonth = 1;
-    public static int ownerExpirationYear = 2025;
-    public static int ownerSecurityCode = 999;
+    public static String genericCardNumber = "9999999999999999";
+    public static int genericExpirationMonth = 1;
+    public static int genericExpirationYear = 2025;
+    public static int genericSecurityCode = 999;
     public static Account ownerAccount = new Account("BillyGates", "csce247",
-                    false, false, false, false, false, true,
-                            new Payment(ownerCardNumber, ownerExpirationMonth, ownerExpirationYear, ownerSecurityCode),
-                            new AccountType("owner"));
-    public static Account testAccount = new Account("k", "k",
-                    false, false, false, false, false, true,
-                            new Payment(ownerCardNumber, ownerExpirationMonth, ownerExpirationYear, ownerSecurityCode),
-                            new AccountType("standard"));
-    public static Movie testMovie = new Movie("Frozen", 0, "Stan Stefanov", 1, 30, 9, "FSU", "12:12");
+            false, false, false, false, false, true,
+            new Payment(genericCardNumber, genericExpirationMonth, genericExpirationYear, genericSecurityCode),
+            new AccountType("owner"));
+    public static Account testAccount = new Account("user", "pass",
+            false, false, false, false, false, false,
+            new Payment(genericCardNumber, genericExpirationMonth, genericExpirationYear, genericSecurityCode),
+            new AccountType("standard"));
+
+    public static Account employeeAccount = new Account("employee", "cinemore",
+            false, false, false, false, false, false,
+            new Payment(genericCardNumber, genericExpirationMonth, genericExpirationYear, genericSecurityCode),
+            new AccountType("admin"));
+
+
+    public static Movie testMovie = new Movie("Frozen", 0, "Stan Stefanov", 1, 30, 9, "USC", "12:12");
+    public static Movie secondTestMovie = new Movie("TheJungleBook", 0, "Stan Stefanov", 1, 30, 9, "USC", "17:30");
 
 
     public static void main(String args[]) {
@@ -38,7 +46,9 @@ public class MovieDriver {
 
         ad.addAccount(ownerAccount);
         ad.addAccount(testAccount);
+        ad.addAccount(employeeAccount);
         md.addMovie(testMovie);
+        md.addMovie(secondTestMovie);
 
         while (true) {
             printHomePage();
@@ -48,19 +58,17 @@ public class MovieDriver {
                 secondaryChoice = s.nextInt();
                 if (secondaryChoice == 1) {
                     Account guestAccount = new Account("Guest", null,
-                                            false, false, false, false, false,
-                                            false, null, null);
+                            false, false, false, false, false,
+                            false, null, null);
                     printMoviePage();
                     md.printMovieDatabase();
 
                     if (md.movies.isEmpty()) {
                         System.out.println("\nThere are currently no movies in theaters.\n");
-                    }
-
-                    else {
+                    } else {
                         movie = "";
                         boolean satisfied = true;
-                        while(satisfied) {
+                        while (satisfied) {
                             System.out.println("Which movie would you like to go see?");
                             movie = s.next();
 
@@ -77,7 +85,7 @@ public class MovieDriver {
                             satisfied = true;
                             while (satisfied) {
                                 for (int i = 0; i < ticketAmt; i++) {
-                                    System.out.println("\nWhich seat would you like for ticket #" + (i+1)
+                                    System.out.println("\nWhich seat would you like for ticket #" + (i + 1)
                                             + "\nThese seats are currently available. ");
                                     td.printSeatsAvailable(movie);
                                     System.out.println();
@@ -86,46 +94,46 @@ public class MovieDriver {
                                     Ticket newTicket = new Ticket(md.findMovie(movie).getCost(), seat,
                                             false, md.findMovie(movie), guestAccount);
 
-                                    System.out.println("\n---------------------- Payment Information ----------------------\n");
-                                    Payment payment = new Payment();
-                                    boolean isIncorrect = true;
-
-                                    while(isIncorrect) {
-                                        System.out.println("What is your 16 digit credit or debit card number?");
-                                        cardNumber = s.next();
-                                        if(payment.setCardNumber(cardNumber)) {
-                                            isIncorrect = false;
-                                        }
-                                    }
-
-                                    isIncorrect = true;
-                                    while(isIncorrect) {
-                                        System.out.println("What is your expiration month?");
-                                        expirationMonth = s.nextInt();
-                                        if(payment.setExpirationMonth(expirationMonth)) {
-                                            isIncorrect = false;
-                                        }
-                                    }
-
-                                    isIncorrect = true;
-                                    while(isIncorrect) {
-                                        System.out.println("What is your expiration year?");
-                                        expirationYear = s.nextInt();
-                                        if(payment.setExpirationYear(expirationYear)) {
-                                            isIncorrect = false;
-                                        }
-                                    }
-
-                                    isIncorrect = true;
-                                    while(isIncorrect) {
-                                        System.out.println("What is your security code?");
-                                        securityCode = s.nextInt();
-                                        if(payment.setSecurityCode(securityCode)) {
-                                            isIncorrect = false;
-                                        }
-                                    }
-
                                     td.addTicket(newTicket);
+                                }
+
+                                System.out.println("\n---------------------- Payment Information ----------------------\n");
+                                Payment payment = new Payment();
+                                boolean isIncorrect = true;
+
+                                while (isIncorrect) {
+                                    System.out.println("What is your 16 digit credit or debit card number?");
+                                    cardNumber = s.next();
+                                    if (payment.setCardNumber(cardNumber)) {
+                                        isIncorrect = false;
+                                    }
+                                }
+
+                                isIncorrect = true;
+                                while (isIncorrect) {
+                                    System.out.println("What is your expiration month?");
+                                    expirationMonth = s.nextInt();
+                                    if (payment.setExpirationMonth(expirationMonth)) {
+                                        isIncorrect = false;
+                                    }
+                                }
+
+                                isIncorrect = true;
+                                while (isIncorrect) {
+                                    System.out.println("What is your expiration year?");
+                                    expirationYear = s.nextInt();
+                                    if (payment.setExpirationYear(expirationYear)) {
+                                        isIncorrect = false;
+                                    }
+                                }
+
+                                isIncorrect = true;
+                                while (isIncorrect) {
+                                    System.out.println("What is your security code?");
+                                    securityCode = s.nextInt();
+                                    if (payment.setSecurityCode(securityCode)) {
+                                        isIncorrect = false;
+                                    }
                                 }
                                 satisfied = false;
                             }
@@ -202,7 +210,7 @@ public class MovieDriver {
                                     newMovie.setTheater(theater);
 
                                     System.out.println("What showtime will this movie be played during?" +
-                                                        "\nEnter in format: 00:00");
+                                            "\nEnter in format: 00:00");
                                     showtime = s.next();
                                     newMovie.setShowtime(showtime);
 
@@ -215,12 +223,11 @@ public class MovieDriver {
                                     System.out.println("What movie would you like to remove?");
                                     removeMovieChoice = s.next();
 
-                                    if(md.findMovie(removeMovieChoice) != null) {
+                                    if (md.findMovie(removeMovieChoice) != null) {
                                         System.out.println("\n\nThe movie " + md.findMovie(removeMovieChoice).getTitle() +
                                                 " has been removed.\n\n");
                                         md.removeMovie(md.findMovie(removeMovieChoice));
-                                    }
-                                    else {
+                                    } else {
                                         System.out.println("\n\nThis movie is not in the system.\n\n");
                                     }
 
@@ -230,10 +237,9 @@ public class MovieDriver {
                                     System.out.println("Please enter the account username you would like to search for.");
                                     account = s.next();
 
-                                    if(ad.findAccount(account) != null) {
+                                    if (ad.findAccount(account) != null) {
                                         ad.printAccount(account);
-                                    }
-                                    else {
+                                    } else {
                                         System.out.println("\n\nThis account is not in the system.\n\n");
                                     }
 
@@ -243,21 +249,20 @@ public class MovieDriver {
                                     System.out.println("What account would you like to remove?");
                                     account = s.next();
 
-                                    if(ad.findAccount(account).getAccountType().equals("owner")) {
+                                    if (ad.findAccount(account).getAccountType().equals("owner")) {
                                         System.out.println("\n\nYou cannot remove this account.\n\n");
                                     }
 
-                                    if(ad.findAccount(account) != null) {
+                                    if (ad.findAccount(account) != null) {
                                         System.out.println("Are you sure you want to REMOVE this account?");
                                         deleteChoice = s.next();
 
-                                        if(deleteChoice.equalsIgnoreCase("yes")) {
+                                        if (deleteChoice.equalsIgnoreCase("yes")) {
                                             System.out.println("\n\nThe account " + ad.findAccount(account).getUsername()
                                                     + " has been removed.\n\n");
                                             ad.removeAccount(ad.findAccount(account));
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         System.out.println("\n\nThis account is not in the system.\n\n");
                                     }
 
@@ -269,9 +274,7 @@ public class MovieDriver {
 
                                     if (ad.findAccount(account) != null) {
                                         ad.findAccount(account).setAccountType(new AccountType("admin"));
-                                    }
-
-                                    else {
+                                    } else {
                                         System.out.println("\n\nThis account is not in the system.\n\n");
                                     }
 
@@ -283,9 +286,7 @@ public class MovieDriver {
 
                                     if (ad.findAccount(account) != null) {
                                         ad.findAccount(account).setAccountType(new AccountType("standard"));
-                                    }
-
-                                    else {
+                                    } else {
                                         System.out.println("\n\nThis account is not in the system.\n\n");
                                     }
 
@@ -308,7 +309,7 @@ public class MovieDriver {
                     if (currentAccount.getAccountType().equals("admin")) {
 
                         adminSatisfied = true;
-                        while(adminSatisfied) {
+                        while (adminSatisfied) {
                             printAdminConsole();
                             accountChoice = s.nextInt();
                             switch (accountChoice) {
@@ -324,7 +325,7 @@ public class MovieDriver {
                                     addMovieChoice = s.next();
                                     director = addMovieChoice;
                                     addMovieChoice = s.next();
-                                    director += addMovieChoice;
+                                    director += " " + addMovieChoice;
                                     newMovie.setDirector(director);
 
                                     System.out.println("How many hours is the movie?");
@@ -383,7 +384,7 @@ public class MovieDriver {
                     if (currentAccount.getAccountType().equals("standard")) {
 
                         standardSatisfied = true;
-                        while(standardSatisfied) {
+                        while (standardSatisfied) {
 
                             printAccountPage();
                             accountChoice = s.nextInt();
@@ -396,7 +397,7 @@ public class MovieDriver {
                                     td.printTickets(currentAccount);
                                     System.out.println("Would you like to print out your tickets?");
                                     printChoice = s.next();
-                                    if(printChoice.equalsIgnoreCase("yes")) {
+                                    if (printChoice.equalsIgnoreCase("yes")) {
                                         td.printOutTickets(currentAccount);
                                     }
                                     continue;
@@ -407,12 +408,10 @@ public class MovieDriver {
 
                                     if (md.movies.isEmpty()) {
                                         System.out.println("\nThere are currently no movies in theaters.\n");
-                                    }
-
-                                    else {
+                                    } else {
                                         movie = "";
                                         boolean satisfied = true;
-                                        while(satisfied) {
+                                        while (satisfied) {
                                             System.out.println("Which movie would you like to go see?");
                                             movie = s.next();
 
@@ -429,8 +428,8 @@ public class MovieDriver {
                                             satisfied = true;
                                             while (satisfied) {
                                                 for (int i = 0; i < ticketAmt; i++) {
-                                                    System.out.println("\nWhich seat would you like for ticket #" + (i+1)
-                                                                        + "\nThese seats are currently available. ");
+                                                    System.out.println("\nWhich seat would you like for ticket #" + (i + 1)
+                                                            + "\nThese seats are currently available. ");
                                                     td.printSeatsAvailable(movie);
                                                     System.out.println();
                                                     seat = s.next();
@@ -444,11 +443,11 @@ public class MovieDriver {
 
                                         } else {
                                             System.out.println("We are sorry to inform you that all tickets for " +
-                                                                "this showing have been bought out. ");
+                                                    "this showing have been bought out. ");
                                         }
 
                                         System.out.println("\n\nSUCCESS! You have purchased " + ticketAmt
-                                                            + " tickets for the movie " + movie + "\n\n");
+                                                + " tickets for the movie " + movie + "\n\n");
 
                                     }
                                     continue;
@@ -460,10 +459,10 @@ public class MovieDriver {
                                     while (rating) {
                                         if (md.findMovie(movie) != null) {
                                             boolean ratingCheck = true;
-                                            while(ratingCheck) {
+                                            while (ratingCheck) {
                                                 System.out.println("What would you like to rate this movie?");
                                                 ratingChoice = s.nextInt();
-                                                if(md.findMovie(movie).setRating(ratingChoice)) {
+                                                if (md.findMovie(movie).setRating(ratingChoice)) {
                                                     ratingCheck = false;
                                                 }
                                             }
@@ -507,15 +506,14 @@ public class MovieDriver {
             if (mainChoice == 2) {
                 username = null;
                 createAccount = true;
-                while(createAccount) {
+                while (createAccount) {
 
                     System.out.println("What would you like your username to be?");
                     username = s.next();
 
                     if (!ad.usernameAvailable(username)) {
                         System.out.println("This username has been taken");
-                    }
-                    else {
+                    } else {
                         createAccount = false;
                     }
                 }
@@ -523,14 +521,14 @@ public class MovieDriver {
                 password = s.next();
 
                 Account newAccount = new Account(username, password,
-                            false, false, false, false, false, false,
-                            null, new AccountType("standard"));
+                        false, false, false, false, false, false,
+                        null, new AccountType("standard"));
 
                 System.out.println("\n--------------------- Personal Information ---------------------\n");
                 System.out.println("Are you or have you ever served in a military branch?");
                 createAccountChoice = s.next();
 
-                if(createAccountChoice.equalsIgnoreCase("yes")) {
+                if (createAccountChoice.equalsIgnoreCase("yes")) {
                     newAccount.setMilitary(true);
                     newAccount.setDiscount(true);
                 }
@@ -538,7 +536,7 @@ public class MovieDriver {
                 System.out.println("Are you above the age of 65?");
                 createAccountChoice = s.next();
 
-                if(createAccountChoice.equalsIgnoreCase("yes")) {
+                if (createAccountChoice.equalsIgnoreCase("yes")) {
                     newAccount.setSenior(true);
                     newAccount.setDiscount(true);
                 }
@@ -546,7 +544,7 @@ public class MovieDriver {
                 System.out.println("Do you teach at a school?");
                 createAccountChoice = s.next();
 
-                if(createAccountChoice.equalsIgnoreCase("yes")) {
+                if (createAccountChoice.equalsIgnoreCase("yes")) {
                     newAccount.setTeacher(true);
                     newAccount.setDiscount(true);
                 }
@@ -554,7 +552,7 @@ public class MovieDriver {
                 System.out.println("Do you have a disability?");
                 createAccountChoice = s.next();
 
-                if(createAccountChoice.equalsIgnoreCase("yes")) {
+                if (createAccountChoice.equalsIgnoreCase("yes")) {
                     newAccount.setDisability(true);
                     newAccount.setDiscount(true);
                 }
@@ -562,7 +560,7 @@ public class MovieDriver {
                 System.out.println("Do you attend a university?");
                 createAccountChoice = s.next();
 
-                if(createAccountChoice.equalsIgnoreCase("yes")) {
+                if (createAccountChoice.equalsIgnoreCase("yes")) {
                     newAccount.setDisability(true);
                     newAccount.setDiscount(true);
                 }
@@ -571,37 +569,37 @@ public class MovieDriver {
                 Payment payment = new Payment();
                 boolean isIncorrect = true;
 
-                while(isIncorrect) {
+                while (isIncorrect) {
                     System.out.println("What is your 16 digit credit or debit card number?");
                     cardNumber = s.next();
-                    if(payment.setCardNumber(cardNumber)) {
+                    if (payment.setCardNumber(cardNumber)) {
                         isIncorrect = false;
                     }
                 }
 
                 isIncorrect = true;
-                while(isIncorrect) {
+                while (isIncorrect) {
                     System.out.println("What is your expiration month?");
                     expirationMonth = s.nextInt();
-                    if(payment.setExpirationMonth(expirationMonth)) {
+                    if (payment.setExpirationMonth(expirationMonth)) {
                         isIncorrect = false;
                     }
                 }
 
                 isIncorrect = true;
-                while(isIncorrect) {
+                while (isIncorrect) {
                     System.out.println("What is your expiration year?");
                     expirationYear = s.nextInt();
-                    if(payment.setExpirationYear(expirationYear)) {
+                    if (payment.setExpirationYear(expirationYear)) {
                         isIncorrect = false;
                     }
                 }
 
                 isIncorrect = true;
-                while(isIncorrect) {
+                while (isIncorrect) {
                     System.out.println("What is your security code?");
                     securityCode = s.nextInt();
-                    if(payment.setSecurityCode(securityCode)) {
+                    if (payment.setSecurityCode(securityCode)) {
                         isIncorrect = false;
                     }
                 }
@@ -625,31 +623,31 @@ public class MovieDriver {
 
     public static void printHomePage() {
         System.out.println("\n-------------------------------------------------\n\n" +
-                            "\t\t\t Welcome to CineMore\n\n" +
-                            "-------------------------------------------------\n\n" +
-                            "Please enter a number ...\n" +
-                            "1. Login \n" +
-                            "2. Create Account \n" +
-                            "3. Help \n" +
-                            "4. Exit");
+                "\t\t\t Welcome to CineMore\n\n" +
+                "-------------------------------------------------\n\n" +
+                "Please enter a number ...\n" +
+                "1. Login \n" +
+                "2. Create Account \n" +
+                "3. Help \n" +
+                "4. Exit");
     }
 
     public static void printAccountPage() {
         System.out.println("-------------------------------------------------\n\n" +
-                            "\t\t\t\t Welcome " + currentAccount.getUsername() + "\n\n" +
-                            "-------------------------------------------------\n\n" +
-                            "What would you like to do today?\nPlease enter a number ...\n\n" +
-                            "1. Change card information \n" +
-                            "2. View ticket purchases \n" +
-                            "3. Go to movie page \n" +
-                            "4. Rate a movie \n" +
-                            "5. Delete account \n" +
-                            "6. Logout");
+                "\t\t\t\t Welcome " + currentAccount.getUsername() + "\n\n" +
+                "-------------------------------------------------\n\n" +
+                "What would you like to do today?\nPlease enter a number ...\n\n" +
+                "1. Change card information \n" +
+                "2. View ticket purchases \n" +
+                "3. Go to movie page \n" +
+                "4. Rate a movie \n" +
+                "5. Delete account \n" +
+                "6. Logout");
     }
 
     public static void printMoviePage() {
         System.out.println("-------------------------------------------------\n\n" +
-                            "███╗░░░███╗░█████╗░██╗░░░██╗██╗███████╗░██████╗\n" +
+                "███╗░░░███╗░█████╗░██╗░░░██╗██╗███████╗░██████╗\n" +
                 "████╗░████║██╔══██╗██║░░░██║██║██╔════╝██╔════╝\n" +
                 "██╔████╔██║██║░░██║╚██╗░██╔╝██║█████╗░░╚█████╗░\n" +
                 "██║╚██╔╝██║██║░░██║░╚████╔╝░██║██╔══╝░░░╚═══██╗\n" +
@@ -667,16 +665,16 @@ public class MovieDriver {
 
     public static void printOwnerConsole() {
         System.out.println("-------------------------------------------------\n\n" +
-                            "\t\tWelcome to the Owner Console" + "\n\n" +
-                            "-------------------------------------------------\n\n" +
-                            "What would you like to do today?\nPlesae enter a number ...\n\n" +
-                            "1. Add a movie\n" +
-                            "2. Remove a movie\n" +
-                            "3. Search for an account\n" +
-                            "4. Remove an account\n" +
-                            "5. Make an account admin\n" +
-                            "6. Make an account standard\n" +
-                            "7. Logout");
+                "\t\tWelcome to the Owner Console" + "\n\n" +
+                "-------------------------------------------------\n\n" +
+                "What would you like to do today?\nPlesae enter a number ...\n\n" +
+                "1. Add a movie\n" +
+                "2. Remove a movie\n" +
+                "3. Search for an account\n" +
+                "4. Remove an account\n" +
+                "5. Make an account admin\n" +
+                "6. Make an account standard\n" +
+                "7. Logout");
     }
 
     public static void printAdminConsole() {

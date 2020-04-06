@@ -12,9 +12,9 @@ public class AccountType {
     }
 
     public AccountType(String accountType) {
-        if(accountType.equals("owner")) setOwner();
-        if(accountType.equals("admin")) setAdmin();
-        if(accountType.equals("standard")) setStandard();
+        if (accountType.equals("owner")) setOwner();
+        if (accountType.equals("admin")) setAdmin();
+        if (accountType.equals("standard")) setStandard();
     }
 
     public void setOwner() {

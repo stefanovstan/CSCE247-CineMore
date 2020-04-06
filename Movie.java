@@ -34,12 +34,20 @@ public class Movie {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDuration() {
         return hours + " Hour(s) " + minutes + " Minute(s)";
     }
 
     public String getDirector() {
         return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
     }
 
     public int getRating() {
@@ -50,25 +58,29 @@ public class Movie {
         return cost;
     }
 
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     public String getTheater() {
         return theater;
+    }
+
+    public void setTheater(String theater) {
+        this.theater = theater;
     }
 
     public String getShowtime() {
         return showtime;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setShowtime(String showtime) {
+        this.showtime = showtime;
     }
 
     public void setDuration(int hours, int minutes) {
         this.hours = hours;
         this.minutes = minutes;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
     }
 
     public boolean setRating(int rating) {
@@ -80,18 +92,6 @@ public class Movie {
             this.rating = 0;
         }
         return false;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public void setTheater(String theater) {
-        this.theater = theater;
-    }
-
-    public void setShowtime(String showtime) {
-        this.showtime = showtime;
     }
 
 }

@@ -40,7 +40,7 @@ public class Payment {
     }
 
     public boolean setExpirationYear(int expirationYear) {
-        if(expirationMonth >= 4 && expirationYear >= 2020 || expirationMonth > 0 && expirationYear > 2020) {
+        if (expirationMonth >= 4 && expirationYear >= 2020 || expirationMonth > 0 && expirationYear >= 2021) {
             this.expirationYear = expirationYear;
             return true;
         }
@@ -50,7 +50,7 @@ public class Payment {
     }
 
     public boolean setSecurityCode(int securityCode) {
-        if(securityCode > 99 && securityCode < 1000) {
+        if (securityCode > 99 && securityCode < 1000) {
             this.securityCode = securityCode;
             return true;
         }

@@ -23,8 +23,8 @@ public class Account {
         type = null;
     }
 
-    public Account (String username, String password, boolean military, boolean senior, boolean teacher,
-                    boolean disability, boolean student, boolean discount, Payment payment, AccountType type) {
+    public Account(String username, String password, boolean military, boolean senior, boolean teacher,
+                   boolean disability, boolean student, boolean discount, Payment payment, AccountType type) {
         setUsername(username);
         setPassword(password);
         setMilitary(military);
@@ -86,7 +86,7 @@ public class Account {
     }
 
     public boolean isStudent() {
-         return student;
+        return student;
     }
 
     public void setStudent(boolean student) {
@@ -108,6 +108,7 @@ public class Account {
     public String getAccountType() {
         return type.getAccountType();
     }
+
     public void setAccountType(AccountType type) {
         this.type = type;
     }

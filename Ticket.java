@@ -21,29 +21,16 @@ public class Ticket {
         setAccount(account);
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setSeatLocation(String seatLocation) {
-        this.seatLocation = seatLocation;
-    }
-
     public void setDiscount(boolean discount) {
         this.discount = discount;
-        price *= .85;
-    }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
+        if (this.discount == true) {
+            price *= .85;
+        }
     }
 
     public boolean isDiscounted() {
-        if(account.isDisability() || account.isStudent() || account.isSenior() || account.isMilitary()
+        if (account.isDisability() || account.isStudent() || account.isSenior() || account.isMilitary()
                 || account.isTeacher()) {
             return true;
         }
@@ -55,16 +42,32 @@ public class Ticket {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public String getSeatLocation() {
         return seatLocation;
+    }
+
+    public void setSeatLocation(String seatLocation) {
+        this.seatLocation = seatLocation;
     }
 
     public Movie getMovie() {
         return movie;
     }
 
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
     public Account getAccount() {
         return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 

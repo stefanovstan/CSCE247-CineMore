@@ -21,7 +21,7 @@ public class TicketDatabase extends Ticket {
         seatsClone = seats.clone();
     }
 
-    public void addTicket (Ticket t) {
+    public void addTicket(Ticket t) {
         tickets.add(t);
     }
 
@@ -33,21 +33,21 @@ public class TicketDatabase extends Ticket {
         for (Ticket t : tickets) {
             if (t.getAccount().equals(a)) {
                 System.out.println("-------------------------------------------------\n" +
-                                    "Ticket Price   : $" + t.getPrice() + "\n" +
-                                    "Seat Location  : " + t.getSeatLocation() + "\n" +
-                                    "Discount       : " + t.isDiscounted() + "\n" +
-                                    "Movie Name     : " + t.getMovie().getTitle() + "\n" +
-                                    "Movie Theater  : " + t.getMovie().getTheater() + "\n" +
-                                    "Movie Showtime : " + t.getMovie().getShowtime() + "\n" +
-                                    "Account Name   : " + t.getAccount().getUsername() + "\n" +
-                                    "-------------------------------------------------\n");
+                        "Ticket Price   : $" + t.getPrice() + "\n" +
+                        "Seat Location  : " + t.getSeatLocation() + "\n" +
+                        "Discount       : " + t.isDiscounted() + "\n" +
+                        "Movie Name     : " + t.getMovie().getTitle() + "\n" +
+                        "Movie Theater  : " + t.getMovie().getTheater() + "\n" +
+                        "Movie Showtime : " + t.getMovie().getShowtime() + "\n" +
+                        "Account Name   : " + t.getAccount().getUsername() + "\n" +
+                        "-------------------------------------------------\n");
             }
         }
     }
 
     public void printOutTickets(Account a) {
         try {
-            File tickets = new File("\\home\\stan\\IdeaProjects\\CSCE247 - CineMore\\Tickets.txt");
+            File tickets = new File("Tickets.txt");
             if (tickets.createNewFile()) {
                 System.out.println("File created: Tickets.txt");
             }
@@ -61,14 +61,14 @@ public class TicketDatabase extends Ticket {
             for (Ticket t : tickets) {
                 if (t.getAccount().equals(a)) {
                     fw.write("----------------CineMore Ticket----------------\n" +
-                                "| Ticket Price   : $" + t.getPrice() + "\n" +
-                                "| Seat Location  : " + t.getSeatLocation() + "\n" +
-                                "| Discount       : " + t.isDiscounted() + "\n" +
-                                "| Movie Name     : " + t.getMovie().getTitle() + "\n" +
-                                "| Movie Theater  : " + t.getMovie().getTheater() + "\n" +
-                                "| Movie Showtime : " + t.getMovie().getShowtime() + "\n" +
-                                "| Account Name   : " + t.getAccount().getUsername() + "\n" +
-                                "-----------------------------------------------\n");
+                            "| Ticket Price   : $" + t.getPrice() + "\n" +
+                            "| Seat Location  : " + t.getSeatLocation() + "\n" +
+                            "| Discount       : " + t.isDiscounted() + "\n" +
+                            "| Movie Name     : " + t.getMovie().getTitle() + "\n" +
+                            "| Movie Theater  : " + t.getMovie().getTheater() + "\n" +
+                            "| Movie Showtime : " + t.getMovie().getShowtime() + "\n" +
+                            "| Account Name   : " + t.getAccount().getUsername() + "\n" +
+                            "-----------------------------------------------\n");
                 }
             }
             fw.close();
