@@ -1,0 +1,9 @@
+----------------CineMore Ticket----------------
+| Ticket Price   : $0.0
+| Seat Location  : 
+| Discount       : false
+| Movie Name     : 
+| Movie Theater  : 
+| Movie Showtime : 
+| Account Name   : 
+-----------------------------------------------
