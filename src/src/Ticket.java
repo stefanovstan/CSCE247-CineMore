@@ -24,7 +24,7 @@ public class Ticket {
     public void setDiscount(boolean discount) {
         this.discount = discount;
 
-        if (this.discount == true) {
+        if (this.discount) {
             price *= .85;
         }
     }
